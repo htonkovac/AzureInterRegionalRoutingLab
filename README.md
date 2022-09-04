@@ -6,6 +6,11 @@ The goal of this repo is to showcase a couple of InterRegion routing usecases. D
 # Goals
 Create a lab environment that can be used for demonstrating cross region traffic flow.
 
+# Prerequisites
+Terraform
+Terragrunt
+Azure Account with RG and SA
+
 # Terragrunt
 ## applying whole region
 This should be done only the first time around. Once the whole infra is deployed future changes are to be applied single module at a time
