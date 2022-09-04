@@ -29,7 +29,7 @@ resource "azurerm_subnet" "subnets" {
 }
 
 resource "azurerm_subnet_route_table_association" "vnet" {
-  for_each = {for k,subnet in var.subnets : k=>subnet if try(subnet.no_rt, false) == true}
+  for_each = { for k, subnet in var.subnets : k => subnet if try(subnet.no_rt, false) == false }
 
   subnet_id      = azurerm_subnet.subnets[each.key].id
   route_table_id = try(each.value.route_table_id, azurerm_route_table.rt.id)
@@ -43,7 +43,7 @@ resource "azurerm_route_table" "rt" {
 }
 
 resource "azurerm_subnet_network_security_group_association" "vnet" {
-  for_each = var.subnets
+  for_each = { for k, subnet in var.subnets : k => subnet if try(subnet.no_nsg, false) == false }
 
   subnet_id                 = azurerm_subnet.subnets[each.key].id
   network_security_group_id = azurerm_network_security_group.nsg.id
