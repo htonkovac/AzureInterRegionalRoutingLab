@@ -24,7 +24,8 @@ cd terragrunt/subscription/us-east-2/az-fw/terragrunt.hcl
 terragrunt apply
 ```
 
-
 # Sources
-1. https://gaunacode.com/using-terragrunt-to-deploy-to-azure#comments-list
+I would like to dearly thank all sources.
+1. https://gaunacode.com/using-terragrunt-to-deploy-to-azure
+2. https://faizanbashir.me/building-an-nginx-webserver-on-azure-using-terraform
 
