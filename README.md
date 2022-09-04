@@ -3,7 +3,8 @@ The goal of this repo is to showcase a couple of InterRegion routing usecases. D
 
 ![Excalidraw](docs/diagrams/AzureInterRegionalRoutingLab.png)
 
-
+# Goals
+Create a lab environment that can be used for demonstrating cross region traffic flow.
 
 # Terragrunt
 ## applying whole region
