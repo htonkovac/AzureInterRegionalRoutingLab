@@ -17,7 +17,7 @@ dependency "net" {
     hub = {
       subnets = {
         "AzureBastionSubnet" = {
-          id = "/some/id"
+          id = "/subscriptions/<subscription-id>/resourceGroups/<resource-group-name>/providers/Microsoft.Network/virtualNetworks/<virtual-network-name>/subnets/<subnet-name>"
         }
       }
     }
@@ -25,6 +25,6 @@ dependency "net" {
 }
 
 inputs = {
-  name = "bastion-${local.location_hyphenated}"
+  name      = "bastion-${local.location_hyphenated}"
   subnet_id = dependency.net.outputs.hub.subnets["AzureBastionSubnet"].id
 }

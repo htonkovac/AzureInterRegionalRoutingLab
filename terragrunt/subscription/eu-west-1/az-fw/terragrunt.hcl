@@ -14,7 +14,7 @@ dependency "laws" {
   config_path = "../log-analytics-workspace"
 
   mock_outputs = {
-    id = "/subscriptions/id"
+    id = "/subscriptions/xxx/resourceGroups/xx/providers/Microsoft.OperationalInsights/workspaces/la-wkspc"
   }
 }
 
@@ -25,10 +25,10 @@ dependency "net" {
     hub = {
       subnets = {
         "AzureFirewallSubnet" = {
-          id = "/some/id"
+          id = "/subscriptions/<subscription-id>/resourceGroups/<resource-group-name>/providers/Microsoft.Network/virtualNetworks/<virtual-network-name>/subnets/<subnet-name>"
         }
         "AzureFirewallManagementSubnet" = {
-          id = "/some/id"
+          id = "/subscriptions/<subscription-id>/resourceGroups/<resource-group-name>/providers/Microsoft.Network/virtualNetworks/<virtual-network-name>/subnets/<subnet-name>"
         }
       }
     }
