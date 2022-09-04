@@ -1,3 +1,3 @@
 locals {
-location = "East US 2"
+  location = "East US 2"
 }

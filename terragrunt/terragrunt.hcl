@@ -10,9 +10,9 @@ locals {
 
   # Automatically load region-level variables
   region_vars = read_terragrunt_config(find_in_parent_folders("region.hcl"))
-  
-  location          = local.region_vars.locals.location
-  subscription_id   = local.subscription_vars.locals.subscription_id
+
+  location        = local.region_vars.locals.location
+  subscription_id = local.subscription_vars.locals.subscription_id
 }
 
 # Generate Azure providers
@@ -24,7 +24,7 @@ generate "versions" {
       required_providers {
         azurerm = {
           source = "hashicorp/azurerm"
-          version = "2.95.0"
+          version = "3.20.0"
         }
         azuread = {
             source = "hashicorp/azuread"
@@ -42,18 +42,18 @@ EOF
 }
 
 remote_state {
-    backend = "azurerm"
-    config = {
-        subscription_id = "${local.subscription_id}"
-        key = "${path_relative_to_include()}/terraform.tfstate"
-        resource_group_name = "AzureInterRegionalRoutingLab"
-        storage_account_name = "tfstateazureroutinglab"
-        container_name = "tf-state"
-    }
-    generate = {
-        path      = "backend.tf"
-        if_exists = "overwrite_terragrunt"
-    }
+  backend = "azurerm"
+  config = {
+    subscription_id      = "${local.subscription_id}"
+    key                  = "${path_relative_to_include()}/terraform.tfstate"
+    resource_group_name  = "AzureInterRegionalRoutingLab"
+    storage_account_name = "tfstateazureroutinglab"
+    container_name       = "tf-state"
+  }
+  generate = {
+    path      = "backend.tf"
+    if_exists = "overwrite_terragrunt"
+  }
 }
 
 # ---------------------------------------------------------------------------------------------------------------------

@@ -4,18 +4,13 @@ variable "resource_group_name" {
 variable "location" {
   type = string
 }
-
-variable "hub_vnet_name" {
+variable "vnet_name" {
   type = string
 }
-variable "hub_address_space" {
+variable "address_space" {
   type = list(string)
 }
-variable "hub_subnets" {
-  description = "waiting for tf 1.3 :)"
-  type        = any
-}
-variable "spokes" {
+variable "subnets" {
   description = "waiting for tf 1.3 :)"
   type        = any
 }
