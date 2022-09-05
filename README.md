@@ -45,6 +45,6 @@ terragrunt (root folder for TG. Contains a config file and one or more "subscrip
 ```
 # Sources
 I would like to dearly thank all sources.
-1. https://gaunacode.com/using-terragrunt-to-deploy-to-azure
-2. https://faizanbashir.me/building-an-nginx-webserver-on-azure-using-terraform
-
+1. https://gaunacode.com/using-terragrunt-to-deploy-to-azure #terragrunt azure introduction
+2. https://faizanbashir.me/building-an-nginx-webserver-on-azure-using-terraform #deploying a VM in azure
+3. https://www.youtube.com/watch?v=LuKYu9ASGyo #terragrunt introduction
