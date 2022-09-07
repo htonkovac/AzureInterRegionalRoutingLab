@@ -3,7 +3,7 @@ terraform {
 }
 
 locals {
-  location_hyphenated = join("-", split(" ", lower(read_terragrunt_config(find_in_parent_folders("region.hcl")).locals.location)))
+  location_hyphenated = read_terragrunt_config(find_in_parent_folders("region.hcl")).locals.location_hyphenated
 }
 include {
   path = find_in_parent_folders()
@@ -55,9 +55,9 @@ inputs = {
     }
   }
 
-  firewall_name                 = "azfw-${local.location_hyphenated}"
-  log_analytics_workspace_id    = dependency.laws.outputs.id
-  
+  firewall_name              = "azfw-${local.location_hyphenated}"
+  log_analytics_workspace_id = dependency.laws.outputs.id
+
   spokes = {
     spokeA = {
       vnet_name     = "spoke-A-${local.location_hyphenated}"

@@ -7,7 +7,7 @@ include {
 }
 
 locals {
-  location_hyphenated = join("-", split(" ", lower(read_terragrunt_config(find_in_parent_folders("region.hcl")).locals.location)))
+  location_hyphenated = read_terragrunt_config(find_in_parent_folders("region.hcl")).locals.location_hyphenated
 }
 
 inputs = {
