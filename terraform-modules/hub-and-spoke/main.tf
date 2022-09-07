@@ -20,12 +20,12 @@ module "spokes" {
 }
 
 module "spoke_routes" {
-  source = "./modules/spoke-routes"
+  source   = "./modules/spoke-routes"
   for_each = var.spokes
 
-  other_spokes = {for k,spoke in var.spokes: k=>spoke if k != each.key}
+  other_spokes  = { for k, spoke in var.spokes : k => spoke if k != each.key }
   vnet_name     = each.value.vnet_name
   address_space = each.value.address_space
 
-  firewall_ip = "1.1.1.1"
+  firewall_ip = module.az_fw.id
 }

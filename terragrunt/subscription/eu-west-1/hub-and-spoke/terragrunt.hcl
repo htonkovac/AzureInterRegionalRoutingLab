@@ -9,7 +9,17 @@ include {
   path = find_in_parent_folders()
 }
 
+
+dependency "laws" {
+  config_path = "../log-analytics-workspace"
+
+  mock_outputs = {
+    id = "/subscriptions/xxx/resourceGroups/xx/providers/Microsoft.OperationalInsights/workspaces/la-wkspc"
+  }
+}
+
 inputs = {
+
   hub_vnet_name     = "hub-vnet-${local.location_hyphenated}"
   hub_address_space = ["10.0.0.0/16"]
   hub_subnets = {
@@ -44,6 +54,10 @@ inputs = {
       address_space = ["10.0.7.0/24"]
     }
   }
+
+  firewall_name                 = "azfw-${local.location_hyphenated}"
+  log_analytics_workspace_id    = dependency.laws.outputs.id
+  
   spokes = {
     spokeA = {
       vnet_name     = "spoke-A-${local.location_hyphenated}"

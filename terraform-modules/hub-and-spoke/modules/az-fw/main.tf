@@ -19,12 +19,6 @@ resource "azurerm_firewall" "fw" {
   }
 }
 
-resource "azurerm_firewall_policy" "policy" {
-  name                = var.firewall_name
-  resource_group_name = var.resource_group_name
-  location            = var.location
-}
-
 resource "azurerm_public_ip" "fw" {
   name                = "${var.firewall_name}-fw-ip"
   resource_group_name = var.resource_group_name

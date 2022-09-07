@@ -44,6 +44,9 @@ inputs = {
       address_space = ["10.10.7.0/24"]
     }
   }
+  firewall_name                 = "azfw-${local.location_hyphenated}"
+  log_analytics_workspace_id    = dependency.laws.outputs.id
+
   spokes = {
     spokeA = {
       vnet_name     = "spoke-A-${local.location_hyphenated}"
