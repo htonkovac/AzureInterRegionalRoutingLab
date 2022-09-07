@@ -19,21 +19,13 @@ module "spokes" {
   subnets       = each.value.subnets
 }
 
-resource "azurerm_virtual_network_peering" "hub-to-spoke" {
+module "spoke_routes" {
+  source = "./modules/spoke-routes"
   for_each = var.spokes
 
-  name                      = "hub-to-${module.spokes[each.key].vnet_name}"
-  resource_group_name       = var.resource_group_name
-  virtual_network_name      = module.hub.vnet_name
-  remote_virtual_network_id = module.spokes[each.key].vnet_id
+  other_spokes = {for k,spoke in var.spokes: k=>spoke if k != each.key}
+  vnet_name     = each.value.vnet_name
+  address_space = each.value.address_space
+
+  firewall_ip = "1.1.1.1"
 }
-
-resource "azurerm_virtual_network_peering" "spoke-to-hub" {
-  for_each = var.spokes
-
-  name                      = "spoke-to-hub"
-  resource_group_name       = var.resource_group_name
-  virtual_network_name      = module.spokes[each.key].vnet_name
-  remote_virtual_network_id = module.hub.vnet_id
-}
-
