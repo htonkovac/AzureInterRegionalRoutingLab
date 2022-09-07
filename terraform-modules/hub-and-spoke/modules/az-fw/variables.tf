@@ -20,3 +20,7 @@ variable "firewall_name" {
 variable "log_analytics_workspace_id" {
   type = string
 }
+
+variable "firewall_policy_id" {
+  type = string
+}

@@ -9,3 +9,7 @@ output "vnet_name" {
 output "subnets" {
   value = azurerm_subnet.subnets
 }
+
+output "default_route_table_name" {
+  value = azurerm_route_table.rt.name
+}

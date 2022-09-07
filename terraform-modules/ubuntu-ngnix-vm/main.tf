@@ -42,7 +42,7 @@ resource "azurerm_linux_virtual_machine" "nginx" {
   disable_password_authentication = false
 
   os_disk {
-    name                 = "nginxdisk01"
+    name                 = "${var.name}-nginxdisk01" #this needs to be unique per location
     caching              = "ReadWrite"
     storage_account_type = "Standard_LRS"
   }

@@ -20,8 +20,8 @@ variable "firewall_ip" {
 
 variable "other_spokes" {
   type = map(object({
-    name : string,
-    address_space : string
+    vnet_name : string,
+    address_space : list(string)
   }))
   default = {}
 }

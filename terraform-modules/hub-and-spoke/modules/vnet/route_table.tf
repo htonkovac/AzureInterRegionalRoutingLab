@@ -11,14 +11,3 @@ resource "azurerm_route_table" "rt" {
   location                      = var.location
   disable_bgp_route_propagation = false
 }
-
-resource "azurerm_route" "default_routes" {
-  for_each = var.other_spokes
-
-  name                   = "${var.vnet_name}-default-route-${each.value.name}"
-  resource_group_name    = var.resource_group_name
-  route_table_name       = azurerm_route_table.rt.name
-  address_prefix         = each.value.address_space
-  next_hop_type          = "VirtualAppliance"
-  next_hop_in_ip_address = var.firewall_ip
-}

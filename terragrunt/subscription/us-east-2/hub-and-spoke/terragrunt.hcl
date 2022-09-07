@@ -9,6 +9,24 @@ include {
   path = find_in_parent_folders()
 }
 
+dependency "laws" {
+  config_path = "../../eu-west-1/log-analytics-workspace"
+
+  mock_outputs = {
+    id = "/subscriptions/xxx/resourceGroups/xx/providers/Microsoft.OperationalInsights/workspaces/la-wkspc"
+  }
+}
+
+dependency "firewall_policy" {
+  config_path = "../firewall-policy"
+
+  mock_outputs_allowed_terraform_commands = ["plan", "validate"]
+  mock_outputs = {
+    id = "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/mygroup1/providers/Microsoft.Network/firewallPolicies/policy1"
+  }
+}
+
+
 inputs = {
   hub_vnet_name     = "hub-vnet-${local.location_hyphenated}"
   hub_address_space = ["10.10.0.0/16"]
@@ -46,6 +64,7 @@ inputs = {
   }
   firewall_name              = "azfw-${local.location_hyphenated}"
   log_analytics_workspace_id = dependency.laws.outputs.id
+  firewall_policy_id         = dependency.firewall_policy.outputs.id
 
   spokes = {
     spokeA = {

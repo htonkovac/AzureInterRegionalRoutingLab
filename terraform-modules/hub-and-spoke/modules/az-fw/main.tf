@@ -4,8 +4,8 @@ resource "azurerm_firewall" "fw" {
   location            = var.location
   sku_name            = "AZFW_VNet"
   sku_tier            = "Premium"
-  firewall_policy_id  = azurerm_firewall_policy.policy.id
-
+  firewall_policy_id  = var.firewall_policy_id
+  
   ip_configuration {
     name                 = "ip_configuration"
     subnet_id            = var.firewall_subnet_id

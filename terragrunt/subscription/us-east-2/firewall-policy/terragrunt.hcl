@@ -1,5 +1,5 @@
 terraform {
-  source = "${get_repo_root()}/terraform-modules/az-fw"
+  source = "${get_repo_root()}/terraform-modules/firewall-policy"
 }
 
 include {
