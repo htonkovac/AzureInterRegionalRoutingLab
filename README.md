@@ -46,5 +46,7 @@ terragrunt (root folder for TG. Contains a config file and one or more "subscrip
 # Sources
 I would like to dearly thank all sources.
 1. https://gaunacode.com/using-terragrunt-to-deploy-to-azure #terragrunt azure introduction
-2. https://faizanbashir.me/building-an-nginx-webserver-on-azure-using-terraform #deploying a VM in azure
+2. https://faizanbashir.me/building-an-nginx-webserver-on-azure-using-terraform #deploying a VM in azureWe
 3. https://www.youtube.com/watch?v=LuKYu9ASGyo #terragrunt introduction
+4. https://journeyofthegeek.com #many blog posts from this guy showcase many usecases in azure networking
+5. https://cloudnetsec.blogspot.com/2019/02/azure-intra-region-and-inter-region.html # especially important blog post 
