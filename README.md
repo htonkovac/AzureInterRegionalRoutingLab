@@ -43,6 +43,17 @@ terragrunt (root folder for TG. Contains a config file and one or more "subscrip
         └── hub-and-spoke
             └── terragrunt.hcl
 ```
+
+# Azure
+Private endpoints finallly have NSG and UDR support
+https://azure.microsoft.com/en-us/updates/general-availability-of-network-security-groups-support-for-private-endpoints/
+https://azure.microsoft.com/en-us/updates/general-availability-of-user-defined-routes-support-for-private-endpoints/
+
+Unfortunatelly, terraform configuration renamed some of the api properties to make them more confusing:
+https://github.com/hashicorp/terraform-provider-azurerm/issues/6334
+
+`enforce_private_link_endpoint_network_policies` needs to be set to `false` in order for the provider to set `PrivateEndpointNetworkPolicies: Enabled`
+
 # Sources
 I would like to dearly thank all sources.
 1. https://gaunacode.com/using-terragrunt-to-deploy-to-azure #terragrunt azure introduction
