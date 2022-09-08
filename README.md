@@ -54,10 +54,13 @@ https://github.com/hashicorp/terraform-provider-azurerm/issues/6334
 
 `enforce_private_link_endpoint_network_policies` needs to be set to `false` in order for the provider to set `PrivateEndpointNetworkPolicies: Enabled`
 
-# Sources
+# Important sources that teach important lessons
 I would like to dearly thank all sources.
 1. https://gaunacode.com/using-terragrunt-to-deploy-to-azure #terragrunt azure introduction
-2. https://faizanbashir.me/building-an-nginx-webserver-on-azure-using-terraform #deploying a VM in azureWe
 3. https://www.youtube.com/watch?v=LuKYu9ASGyo #terragrunt introduction
 4. https://journeyofthegeek.com #many blog posts from this guy showcase many usecases in azure networking
 5. https://cloudnetsec.blogspot.com/2019/02/azure-intra-region-and-inter-region.html # especially important blog post 
+
+# Places I've stolen code snippets from:
+6. https://jeffreyjblanchard.medium.com/azure-private-endpoints-and-terraform-85450fe9861c # deploying a KV
+2. https://faizanbashir.me/building-an-nginx-webserver-on-azure-using-terraform #deploying a VM in azureWe
