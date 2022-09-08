@@ -1,5 +1,5 @@
 terraform {
-  source = "${get_repo_root()}/terraform-modules/hub-and-spoke"
+  source = "${get_repo_root()}/terraform-modules/key-vault-with-pe"
 }
 
 locals {
@@ -13,7 +13,7 @@ include {
 dependency "net" {
   config_path = "../hub-and-spoke"
 
-  mock_outputs = {
+  mock_outputs = { #TODO: fix or no longer use mocks
     spokes = {
       spokeA = {
         subnets = {
@@ -27,18 +27,20 @@ dependency "net" {
 }
 
 dependency "dns" {
-  config_path = "../../global/hub-and-spoke"
+  config_path = "../../global/dns"
 
+  mock_outputs_allowed_terraform_commands = ["plan", "validate"]
   mock_outputs = {
     dns_zones = {
-      privatelink-vaultcore-azure-net = "/subscriptions/<subscription-id>/resourceGroups/<resource-group-name>/providers/Microsoft.Network/virtualNetworks/<virtual-network-name>/subnets/<subnet-name>"
+      privatelink-vaultcore-azure-net = {
+        id = "/subscriptions/<subscription-id>/resourceGroups/<resource-group-name>/providers/Microsoft.Network/privateDnsZones/<zone-name>"
+      }
     }
   }
-
 }
+
 inputs = {
   name      = "mykvlskdjfoiejfs"
-  subnet_id = dependency.net.outputs.hub.subnets["TestingSubnet"].id
-
+  subnet_id = dependency.net.outputs.spokes["spokeA"].subnets["SpokeASubnetA"].id
   private_dns_zone_id = dependency.dns.outputs.dns_zones["privatelink-vaultcore-azure-net"].id
 }

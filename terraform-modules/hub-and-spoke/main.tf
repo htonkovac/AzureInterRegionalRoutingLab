@@ -24,8 +24,9 @@ module "spoke_routes" {
   for_each = var.spokes
 
   resource_group_name = var.resource_group_name
-
-  other_spokes     = { for k, spoke in var.spokes : k => spoke if k != each.key }
+/* TODO: expose as var */
+  /* other_spokes     = { for k, spoke in var.spokes : k => spoke if k != each.key } */
+  other_spokes     = var.spokes
   vnet_name        = each.value.vnet_name
   route_table_name = module.spokes[each.key].default_route_table_name
   address_space    = each.value.address_space

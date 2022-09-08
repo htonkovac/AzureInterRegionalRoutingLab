@@ -43,7 +43,8 @@ resource "azurerm_monitor_diagnostic_setting" "settings" {
   name                       = "diag_settings"
   target_resource_id         = azurerm_firewall.fw.id
   log_analytics_workspace_id = var.log_analytics_workspace_id
-
+  log_analytics_destination_type = "AzureDiagnostics"
+  
   dynamic "log" {
     for_each = data.azurerm_monitor_diagnostic_categories.categories.logs
     content {
