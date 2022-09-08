@@ -1,5 +1,5 @@
 resource "azurerm_virtual_network_peering" "hub-to-spoke" {
-  for_each = setproduct(var.hubs,var.hub)
+  for_each = setproduct(var.hubs, var.hub)
 
   name                      = each.value.vnet_name
   resource_group_name       = var.resource_group_name

@@ -8,6 +8,6 @@ module "az_fw" {
   firewall_subnet_id            = module.hub.subnets["AzureFirewallSubnet"].id
   firewall_management_subnet_id = module.hub.subnets["AzureFirewallManagementSubnet"].id
 
-  firewall_policy_id  = var.firewall_policy_id
-  log_analytics_workspace_id    = var.log_analytics_workspace_id
+  firewall_policy_id         = var.firewall_policy_id
+  log_analytics_workspace_id = var.log_analytics_workspace_id
 }

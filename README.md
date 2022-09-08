@@ -64,3 +64,4 @@ I would like to dearly thank all sources.
 # Places I've stolen code snippets from:
 6. https://jeffreyjblanchard.medium.com/azure-private-endpoints-and-terraform-85450fe9861c # deploying a KV
 2. https://faizanbashir.me/building-an-nginx-webserver-on-azure-using-terraform #deploying a VM in azureWe
+3. https://www.daveperrett.com/articles/2021/08/19/nested-for-each-with-terraform/

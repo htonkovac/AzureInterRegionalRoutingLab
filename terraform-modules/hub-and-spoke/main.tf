@@ -22,13 +22,13 @@ module "spokes" {
 module "spoke_routes" {
   source   = "./modules/spoke-routes"
   for_each = var.spokes
-  
+
   resource_group_name = var.resource_group_name
-  
-  other_spokes  = { for k, spoke in var.spokes : k => spoke if k != each.key }
-  vnet_name     = each.value.vnet_name
+
+  other_spokes     = { for k, spoke in var.spokes : k => spoke if k != each.key }
+  vnet_name        = each.value.vnet_name
   route_table_name = module.spokes[each.key].default_route_table_name
-  address_space = each.value.address_space
+  address_space    = each.value.address_space
 
   firewall_ip = module.az_fw.private_ip_address
 }

@@ -10,6 +10,11 @@ resource "azurerm_network_interface" "nic" {
   }
 }
 
+resource "tls_private_key" "key" {
+  algorithm = "RSA"
+  rsa_bits  = 4096
+}
+
 resource "azurerm_linux_virtual_machine" "nginx" {
   size                = "Standard_B1ls"
   name                = var.name
@@ -27,19 +32,14 @@ resource "azurerm_linux_virtual_machine" "nginx" {
     version   = "latest"
   }
 
-  /* 
-     admin_ssh_key {
+  admin_ssh_key {
     username   = "adminuser"
-    public_key = file("~/.ssh/id_rsa.pub")
+    public_key = tls_private_key.key.public_key_openssh
   }
   
-   computer_name = "nginx"
-   admin_username = "adminuser"
-   disable_password_authentication = true */
   computer_name                   = "nginx"
   admin_username                  = "adminuser"
-  admin_password                  = "Faizan@bashir.123"
-  disable_password_authentication = false
+  disable_password_authentication = true
 
   os_disk {
     name                 = "${var.name}-nginxdisk01" #this needs to be unique per location
