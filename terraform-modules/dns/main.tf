@@ -18,9 +18,9 @@ resource "azurerm_private_dns_zone" "private_dns_zones" {
 }
 
 resource "azurerm_private_dns_zone_virtual_network_link" "private_dns_network_links" {
-  for_each              = {for sp in setproduct(toset(values(local.private_dns_zones)),toset(var.vnet_ids)): "${sp[0]}.${sp[1]}" => sp }
+  for_each = { for sp in setproduct(toset(values(local.private_dns_zones)), toset(var.vnet_ids)) : "${sp[0]}.${sp[1]}" => sp }
 
-  name                  = "${split("/",each.value[1])[2]}-${split("/",each.value[1])[8]}"
+  name                  = "${split("/", each.value[1])[2]}-${split("/", each.value[1])[8]}"
   resource_group_name   = var.resource_group_name
   private_dns_zone_name = each.value[0]
   virtual_network_id    = each.value[1]

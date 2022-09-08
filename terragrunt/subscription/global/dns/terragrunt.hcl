@@ -11,7 +11,7 @@ dependency "net_ew1" {
 
   mock_outputs_allowed_terraform_commands = ["plan", "validate"]
   mock_outputs = {
-    hub ={
+    hub = {
       vnet_id = "/subscriptions/<subscription-id>/resourceGroups/<resource-group-name>/providers/Microsoft.Network/virtualNetworks/<virtual-network-name>"
     }
   }
@@ -22,14 +22,14 @@ dependency "net_ue2" {
 
   mock_outputs_allowed_terraform_commands = ["plan", "validate"]
   mock_outputs = {
-    hub ={
+    hub = {
       vnet_id = "/subscriptions/<subscription-id>/resourceGroups/<resource-group-name>/providers/Microsoft.Network/virtualNetworks/<virtual-network-name>"
     }
   }
 }
 
 inputs = {
-  vnet_ids = [ 
+  vnet_ids = [
     dependency.net_ue2.outputs.hub.vnet_id,
     dependency.net_ew1.outputs.hub.vnet_id,
   ]

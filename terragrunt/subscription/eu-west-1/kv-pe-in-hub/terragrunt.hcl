@@ -37,7 +37,7 @@ dependency "dns" {
 
 }
 inputs = {
-name              = "mykvlskdjfoiejfs"
+  name      = "mykvlskdjfoiejfs"
   subnet_id = dependency.net.outputs.hub.subnets["TestingSubnet"].id
 
   private_dns_zone_id = dependency.dns.outputs.dns_zones["privatelink-vaultcore-azure-net"].id

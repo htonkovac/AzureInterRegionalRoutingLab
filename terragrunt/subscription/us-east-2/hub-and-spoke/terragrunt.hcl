@@ -72,13 +72,13 @@ inputs = {
       address_space = ["10.11.0.0/16"]
       subnets = {
         "SpokeASubnetA" = {
-          name          = "SpokeASubnetA",
-          address_space = ["10.11.1.0/24"],
+          name                                           = "SpokeASubnetA",
+          address_space                                  = ["10.11.1.0/24"],
           enforce_private_link_endpoint_network_policies = true
         },
         "SpokeASubnetB" = {
-          name          = "SpokeASubnetB",
-          address_space = ["10.11.2.0/24"],
+          name                                           = "SpokeASubnetB",
+          address_space                                  = ["10.11.2.0/24"],
           enforce_private_link_endpoint_network_policies = false
         },
         "SpokeASubnetC" = {

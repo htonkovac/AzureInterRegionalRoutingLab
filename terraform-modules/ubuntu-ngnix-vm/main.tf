@@ -36,7 +36,7 @@ resource "azurerm_linux_virtual_machine" "nginx" {
     username   = "adminuser"
     public_key = tls_private_key.key.public_key_openssh
   }
-  
+
   computer_name                   = "nginx"
   admin_username                  = "adminuser"
   disable_password_authentication = true
