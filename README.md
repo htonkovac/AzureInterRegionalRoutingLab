@@ -1,5 +1,5 @@
 # AzureInterRegionalRoutingLab
-The goal of this repo is to showcase a couple of InterRegion routing usecases. Determining the right route table entries can be tricky at times, hence why the lab was created.
+The goal of this repo is to showcase a couple of InterRegion routing usecases.
 
 ![Excalidraw](docs/diagrams/AzureInterRegionalRoutingLab.png)
 
@@ -7,9 +7,9 @@ The goal of this repo is to showcase a couple of InterRegion routing usecases. D
 Create a lab environment that can be used for demonstrating cross region traffic flow.
 
 # Prerequisites
-Terraform
-Terragrunt
-Azure Account with RG and SA
+* Terraform
+* Terragrunt
+* Azure Account with RG and SA
 
 # Terragrunt
 ## applying whole region or subscription
