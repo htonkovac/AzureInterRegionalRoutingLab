@@ -62,8 +62,8 @@ This could be phrased as: PrivateEndpointNetworkPolicies affects only the privat
 
 ![Effective Routes](docs/diagrams/effective-routes.png)
 for context on the above screenshot:
-1. 10.0.0.0/16 - this vnet has PrivateEndpointNetworkPolicies: Enabled (false passed to terraform)
-2. 10.1.0.0/16 - this vnet has PrivateEndpointNetworkPolicies: Disabled (true passed to terraform)
+* 10.0.0.0/16 - this vnet has PrivateEndpointNetworkPolicies: Enabled (false passed to terraform)
+* 10.1.0.0/16 - this vnet has PrivateEndpointNetworkPolicies: Disabled (true passed to terraform)
 
 On the screenshot above we can see that only one InterfaceEndpoint has been invalidated (very bottom of the list). Notice that routes exist for overriding both of them, but only one is working. This is because the setting affects all private endpoint interface routes (in whichever vnet they are created) of private endpoint that exist in the subnet, but doesn't work on private endpoint interface routes from other subnets.
 
