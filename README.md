@@ -54,6 +54,15 @@ https://github.com/hashicorp/terraform-provider-azurerm/issues/6334
 
 `enforce_private_link_endpoint_network_policies` needs to be set to `false` in order for the provider to set `PrivateEndpointNetworkPolicies: Enabled`
 
+# How PrivateEndpointNetworkPolicies: Enabled works
+When this setting is enabled on a subnet. All private endpoints in that subnet will have their routes potentially invalidated in that AND all other subnets (if the right override rule exists). 
+
+In case a subnet has this setting enabled and /32 has been injected from a PE in a peered subnet that doesn't have it enabled. The route will NOT override.
+This could be phrased as: PrivateEndpointNetworkPolicies affects only the private endpoint /32 routes that are created from private endpoints coming from subnets with this setting enabled.
+
+![Effective Routes](docs/diagrams/effective-routes.png)
+On the screenshot above we can see that only one InterfaceEndpoint has been invalidated (very bottom of the list). Notice that routes exist for overriding both of them, but only one is working. This is because the setting affects all private endpoint interface routes (in whichever vnet they are created) of private endpoint that exist in the subnet, but doesn't work on private endpoint interface routes from other subnets.
+
 # Important sources that teach important lessons
 I would like to dearly thank all sources.
 1. https://gaunacode.com/using-terragrunt-to-deploy-to-azure #terragrunt azure introduction

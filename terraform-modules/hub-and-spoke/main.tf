@@ -31,5 +31,6 @@ module "spoke_routes" {
   route_table_name = module.spokes[each.key].default_route_table_name
   address_space    = each.value.address_space
 
+  hub_address_space = var.hub_address_space
   firewall_ip = module.az_fw.private_ip_address
 }

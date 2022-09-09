@@ -18,6 +18,10 @@ variable "firewall_ip" {
   type = string
 }
 
+variable "hub_address_space" {
+  type = list(string)
+}
+
 variable "other_spokes" {
   type = map(object({
     vnet_name : string,

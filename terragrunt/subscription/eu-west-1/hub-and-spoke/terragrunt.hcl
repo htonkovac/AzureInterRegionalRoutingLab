@@ -5,6 +5,7 @@ terraform {
 locals {
   location_hyphenated = read_terragrunt_config(find_in_parent_folders("region.hcl")).locals.location_hyphenated
 }
+
 include {
   path = find_in_parent_folders()
 }
@@ -61,7 +62,7 @@ inputs = {
     "TestingSubnet" = {
       name          = "TestingSubnet",
       address_space = ["10.0.7.0/24"],
-      enforce_private_link_endpoint_network_policies = false
+      enforce_private_link_endpoint_network_policies = true
     }
   }
 
