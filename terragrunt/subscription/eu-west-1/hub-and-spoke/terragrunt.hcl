@@ -43,11 +43,13 @@ inputs = {
       name          = "GatewaySubnet",
       address_space = ["10.0.2.0/24"],
       no_nsg        = true
+      no_rt         = true
     },
     "AzureFirewallSubnet" = {
       name          = "AzureFirewallSubnet",
       address_space = ["10.0.3.0/24"]
       no_nsg        = true
+      no_rt         = true
     },
     "AzureFirewallManagementSubnet" = {
       name          = "AzureFirewallManagementSubnet",

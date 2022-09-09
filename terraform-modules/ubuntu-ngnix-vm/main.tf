@@ -10,11 +10,6 @@ resource "azurerm_network_interface" "nic" {
   }
 }
 
-resource "tls_private_key" "key" {
-  algorithm = "RSA"
-  rsa_bits  = 4096
-}
-
 resource "azurerm_linux_virtual_machine" "nginx" {
   size                = "Standard_B1ls"
   name                = var.name
@@ -34,7 +29,7 @@ resource "azurerm_linux_virtual_machine" "nginx" {
 
   admin_ssh_key {
     username   = "adminuser"
-    public_key = tls_private_key.key.public_key_openssh
+    public_key = file(var.ssh_public_key_file_path)
   }
 
   computer_name                   = "nginx"

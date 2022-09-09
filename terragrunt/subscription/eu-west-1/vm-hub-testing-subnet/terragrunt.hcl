@@ -27,4 +27,5 @@ dependency "net" {
 inputs = {
   name      = "vm-hub-test-subnet-${local.location_hyphenated}"
   subnet_id = dependency.net.outputs.hub.subnets["TestingSubnet"].id
+  ssh_public_key_file_path = "${get_repo_root()}/ssh-keys/mykey.pub"
 }

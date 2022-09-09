@@ -16,10 +16,3 @@ provider "registry.terraform.io/hashicorp/azurerm" {
     "h1:SZgE4TSSEfuJHSZDdJvy2/uj6WpfWzMz2GfclTkpsis=",
   ]
 }
-
-provider "registry.terraform.io/hashicorp/tls" {
-  version = "4.0.2"
-  hashes = [
-    "h1:Gd73uM6TrlgdI8+3o2EJW60LelDvN6tCfwjcfQLiprA=",
-  ]
-}

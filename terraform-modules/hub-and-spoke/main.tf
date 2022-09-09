@@ -24,12 +24,22 @@ module "spoke_routes" {
   for_each = var.spokes
 
   resource_group_name = var.resource_group_name
-/* TODO: expose as var */
-  /* other_spokes     = { for k, spoke in var.spokes : k => spoke if k != each.key } */
   other_spokes     = var.spokes
   vnet_name        = each.value.vnet_name
   route_table_name = module.spokes[each.key].default_route_table_name
-  address_space    = each.value.address_space
+
+  hub_address_space = var.hub_address_space
+  firewall_ip = module.az_fw.private_ip_address
+}
+
+# TODO: consider removing. this would add default routes for the hub as well. Needed only for shared services in the hub. Most managed services like Bastion, Firewall, etc. don't fully support route tables.
+module "hub_routes" {
+  source   = "./modules/spoke-routes"
+
+  resource_group_name = var.resource_group_name
+  other_spokes     = var.spokes
+  vnet_name        = module.hub.vnet_name
+  route_table_name = module.hub.default_route_table_name
 
   hub_address_space = var.hub_address_space
   firewall_ip = module.az_fw.private_ip_address
