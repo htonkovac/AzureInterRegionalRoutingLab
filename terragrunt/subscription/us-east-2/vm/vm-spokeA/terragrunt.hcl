@@ -11,7 +11,7 @@ locals {
 }
 
 dependency "net" {
-  config_path = "../hub-and-spoke"
+  config_path = "../../hub-and-spoke"
 
   mock_outputs = {
     spokes = {

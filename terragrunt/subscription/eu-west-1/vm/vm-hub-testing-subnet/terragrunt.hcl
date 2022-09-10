@@ -1,5 +1,5 @@
 terraform {
-  source = "${get_repo_root()}/terraform-modules/bastion"
+  source = "${get_repo_root()}/terraform-modules/ubuntu-ngnix-vm"
 }
 
 include {
@@ -11,12 +11,12 @@ locals {
 }
 
 dependency "net" {
-  config_path = "../hub-and-spoke"
+  config_path = "../../hub-and-spoke"
 
   mock_outputs = {
     hub = {
       subnets = {
-        "AzureBastionSubnet" = {
+        "SpokeASubnetA" = {
           id = "/subscriptions/<subscription-id>/resourceGroups/<resource-group-name>/providers/Microsoft.Network/virtualNetworks/<virtual-network-name>/subnets/<subnet-name>"
         }
       }
@@ -25,6 +25,7 @@ dependency "net" {
 }
 
 inputs = {
-  name      = "bastion-${local.location_hyphenated}"
-  subnet_id = dependency.net.outputs.hub.subnets["AzureBastionSubnet"].id
+  name                     = "vm-hub-test-subnet-${local.location_hyphenated}"
+  subnet_id                = dependency.net.outputs.hub.subnets["TestingSubnet"].id
+  ssh_public_key_file_path = "${get_repo_root()}/ssh-keys/mykey.pub"
 }
