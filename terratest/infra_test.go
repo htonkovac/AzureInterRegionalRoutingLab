@@ -1,12 +1,14 @@
 package test
 
 import (
+	"io/ioutil"
+	"log"
 	"os"
-	"os/exec"
 	"testing"
 
 	"github.com/gruntwork-io/terratest/modules/terraform"
-	"github.com/stretchr/testify/assert"
+	// "github.com/stretchr/testify/assert"
+	"golang.org/x/crypto/ssh"
 	// "os"
 )
 
@@ -18,30 +20,66 @@ func TestMain(m *testing.M) {
 }
 func TestTerragruntExample(t *testing.T) {
 
-	terraformVMOptions := terraform.WithDefaultRetryableErrors(t, &terraform.Options{
-		TerraformDir:    "../terragrunt/subscription/us-east-2/vm-spokeA",
+	tfVmOptions := terraform.WithDefaultRetryableErrors(t, &terraform.Options{
+		TerraformDir:    "../terragrunt/subscription/eu-west-1/vm/vm-spokeA",
 		TerraformBinary: "terragrunt",
 	})
 
-	terraformBastionOptions := terraform.WithDefaultRetryableErrors(t, &terraform.Options{
-		TerraformDir:    "../terragrunt/subscription/us-east-2/bastion",
+	tfAzFwOptions := terraform.WithDefaultRetryableErrors(t, &terraform.Options{
+		TerraformDir:    "../terragrunt/subscription/eu-west-1/hub-and-spoke",
 		TerraformBinary: "terragrunt",
 	})
 
-	vmId := terraform.Output(t, terraformVMOptions, "vm_id")
-	bastionName := terraform.Output(t, terraformBastionOptions, "bastion_name")
-	resourceGroupName := terraform.Output(t, terraformBastionOptions, "resource_group_name")
+	vmAddr := terraform.Output(t, tfVmOptions, "private_ip") + ":22"
+	bastionAddr := terraform.Output(t, tfAzFwOptions, "fw_public_ip_address") + ":22"
 
-	// RunAz("az network bastion ssh --name " + bastionName + " --resource-group" + resourceGroupName + " --target-resource-id "+vmId+" --auth-type ssh-key --username xyz")
-	assert.Equal(t, "one input another input", "az network bastion ssh --name "+bastionName+" --resource-group "+resourceGroupName+" --target-resource-id "+vmId+" --auth-type ssh-key --username xyz")
+	config := &ssh.ClientConfig{
+		User: "adminuser",
+		Auth: []ssh.AuthMethod{
+			publicKey("../ssh-keys/mykey"),
+		},
+		HostKeyCallback: ssh.InsecureIgnoreHostKey(),
+	}
+	// connect to the bastion host
+	bClient, err := ssh.Dial("tcp", bastionAddr, config)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	// Dial a connection to the service host, from the bastion
+	conn, err := bClient.Dial("tcp", vmAddr)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	ncc, chans, reqs, err := ssh.NewClientConn(conn, vmAddr, config)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	// sClient is an ssh client connected to the service host, through the bastion host.
+	sClient := ssh.NewClient(ncc, chans, reqs)
+
+	session, err := sClient.NewSession()
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	err = session.Run("echo hi")
+	if err != nil {
+		log.Fatal(err)
+	}
 }
 
-// az network bastion ssh --name MyBastionHost --resource-group MyResourceGroup --target-resource-id vmResourceId --auth-type password --username xyz
-
-func RunAz(cmd string) []byte {
-	out, err := exec.Command("bash", "-c", cmd).Output()
+func publicKey(path string) ssh.AuthMethod {
+	key, err := ioutil.ReadFile(path)
 	if err != nil {
-		panic("some error found")
+		panic(err)
 	}
-	return out
+	signer, err := ssh.ParsePrivateKey(key)
+	if err != nil {
+		panic(err)
+	}
+
+	return ssh.PublicKeys(signer)
 }

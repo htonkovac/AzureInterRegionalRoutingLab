@@ -78,3 +78,5 @@ I would like to dearly thank all sources.
 6. https://jeffreyjblanchard.medium.com/azure-private-endpoints-and-terraform-85450fe9861c # deploying a KV
 2. https://faizanbashir.me/building-an-nginx-webserver-on-azure-using-terraform #deploying a VM in azureWe
 3. https://www.daveperrett.com/articles/2021/08/19/nested-for-each-with-terraform/
+
+4. https://stackoverflow.com/questions/35906991/go-x-crypto-ssh-how-to-establish-ssh-connection-to-private-instance-over-a-ba
