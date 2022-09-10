@@ -39,6 +39,6 @@ resource "azurerm_linux_virtual_machine" "nginx" {
   os_disk {
     name                 = "${var.name}-nginxdisk01" #this needs to be unique per location
     caching              = "ReadWrite"
-    storage_account_type = "Stakeandard_LRS"
+    storage_account_type = "Standard_LRS"
   }
 }
