@@ -18,14 +18,13 @@ func TestMain(m *testing.M) {
 }
 func TestTerragruntExample(t *testing.T) {
 
-	
 	terraformVMOptions := terraform.WithDefaultRetryableErrors(t, &terraform.Options{
-		TerraformDir: "../terragrunt/subscription/us-east-2/vm-spokeA",
+		TerraformDir:    "../terragrunt/subscription/us-east-2/vm-spokeA",
 		TerraformBinary: "terragrunt",
 	})
 
 	terraformBastionOptions := terraform.WithDefaultRetryableErrors(t, &terraform.Options{
-		TerraformDir: "../terragrunt/subscription/us-east-2/bastion",
+		TerraformDir:    "../terragrunt/subscription/us-east-2/bastion",
 		TerraformBinary: "terragrunt",
 	})
 
@@ -34,9 +33,8 @@ func TestTerragruntExample(t *testing.T) {
 	resourceGroupName := terraform.Output(t, terraformBastionOptions, "resource_group_name")
 
 	// RunAz("az network bastion ssh --name " + bastionName + " --resource-group" + resourceGroupName + " --target-resource-id "+vmId+" --auth-type ssh-key --username xyz")
-	assert.Equal(t, "one input another input", "az network bastion ssh --name " + bastionName + " --resource-group " + resourceGroupName + " --target-resource-id "+vmId+" --auth-type ssh-key --username xyz")
+	assert.Equal(t, "one input another input", "az network bastion ssh --name "+bastionName+" --resource-group "+resourceGroupName+" --target-resource-id "+vmId+" --auth-type ssh-key --username xyz")
 }
-
 
 // az network bastion ssh --name MyBastionHost --resource-group MyResourceGroup --target-resource-id vmResourceId --auth-type password --username xyz
 
