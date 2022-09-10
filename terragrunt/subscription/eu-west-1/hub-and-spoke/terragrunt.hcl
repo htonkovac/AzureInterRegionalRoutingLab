@@ -62,8 +62,8 @@ inputs = {
       address_space = ["10.0.6.0/24"]
     },
     "TestingSubnet" = {
-      name          = "TestingSubnet",
-      address_space = ["10.0.7.0/24"],
+      name                                           = "TestingSubnet",
+      address_space                                  = ["10.0.7.0/24"],
       enforce_private_link_endpoint_network_policies = true
     }
   }
@@ -78,8 +78,8 @@ inputs = {
       address_space = ["10.1.0.0/16"]
       subnets = {
         "SpokeASubnetA" = {
-          name          = "SpokeASubnetA",
-          address_space = ["10.1.1.0/24"]
+          name                                           = "SpokeASubnetA",
+          address_space                                  = ["10.1.1.0/24"]
           enforce_private_link_endpoint_network_policies = false
         },
         "SpokeASubnetB" = {

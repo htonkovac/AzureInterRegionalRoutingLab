@@ -27,7 +27,7 @@ dependency "net" {
 }
 
 inputs = {
-  name      = "vm2-${local.location_hyphenated}-spokeB"
-  subnet_id = dependency.net.outputs.spokes["spokeB"].subnets["SpokeBSubnetA"].id
+  name                     = "vm2-${local.location_hyphenated}-spokeB"
+  subnet_id                = dependency.net.outputs.spokes["spokeB"].subnets["SpokeBSubnetA"].id
   ssh_public_key_file_path = "${get_repo_root()}/ssh-keys/mykey.pub"
 }

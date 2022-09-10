@@ -18,11 +18,11 @@ resource "azurerm_route" "to_home_hub" {
   next_hop_in_ip_address = var.firewall_ip
 }
 
-resource "azurerm_route" "internet_and_interregion" {
+/* resource "azurerm_route" "internet_and_interregion" {
   name                   = "default-route-internet-and-interregion"
   resource_group_name    = var.resource_group_name
   route_table_name       = var.route_table_name
   address_prefix         = "0.0.0.0/0" #Internet and inter region
   next_hop_type          = "VirtualAppliance"
   next_hop_in_ip_address = var.firewall_ip
-}
+} */

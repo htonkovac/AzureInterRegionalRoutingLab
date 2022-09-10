@@ -11,8 +11,8 @@ import (
 )
 
 func TestMain(m *testing.M) {
-	az network bastion tunnel --name MyBastionHost --resource-group MyResourceGroup --target-resource-id vmResourceId --resource-port 22 --port 50022
-	
+	// az network bastion tunnel --name MyBastionHost --resource-group MyResourceGroup --target-resource-id vmResourceId --resource-port 22 --port 50022
+
 	exitVal := m.Run()
 	os.Exit(exitVal)
 }
