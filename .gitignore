@@ -29,3 +29,5 @@ override.tf.json
 # example: *tfplan*
 .terragrunt-cache
 ssh-keys
+fw-info*
+.vscode

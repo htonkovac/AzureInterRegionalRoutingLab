@@ -25,7 +25,7 @@ resource "azurerm_firewall_policy_rule_collection_group" "jumphost" {
     rule {
       name                  = "ssh_in_private_range"
       protocols             = ["TCP"]
-      source_addresses      = ["10.0.0.0/8"]
+      source_addresses      = [var.jump_host_ip]
       destination_addresses = ["10.0.0.0/8"]
       destination_ports     = ["22"]
     }

@@ -1,4 +1,12 @@
-FW_IP=$(shell cd terragrunt/subscription/eu-west-1/hub-and-spoke && terragrunt output -raw fw_public_ip_address 2>/dev/null)
+SHELL=/bin/bash
+#interestingly sh and bash have different implementations of the echo command. Therefore using bash.
+
+FW_EW1_IP_FROM_TF=$(shell cd terragrunt/subscription/eu-west-1/hub-and-spoke && terragrunt output -raw fw_public_ip_address 2>/dev/null)
+FW_UE2_IP_FROM_TF=$(shell cd terragrunt/subscription/us-east-2/hub-and-spoke && terragrunt output -raw fw_public_ip_address 2>/dev/null)
+
+FW_EW1_IP=$(shell cat fw-info-west-europe)
+FW_UE2_IP=$(shell cat fw-info-us-east-2)
+
 fmt:
 	terraform fmt -recursive
 	terragrunt hclfmt
@@ -29,12 +37,21 @@ add_ssh_key:
 	eval "$(ssh-agent)"
 	ssh-add ssh-keys/mykey
 
+# if the repo is cloned there will be no ssh key. This command can generate the key
+generate_new_ssh_key:
+	ssh-keygen -t rsa -b 4096 -f ./ssh-keys/mykey
+
 # In case we redeploy something the ssh known hosts might need updating
 ssh_new_fingerprint:
-	ssh-keygen -R $(FW_IP)
+	ssh-keygen -R $(FW_EW1_IP)
 
 ssh_jumphost:
-	ssh -v -A -i ssh-keys/mykey adminuser@$(FW_IP)
+	ssh -v -A -i ssh-keys/mykey adminuser@$(FW_EW1_IP)
 
 ssh_vm:
-	ssh -v -o StrictHostKeyChecking=no -i ssh-keys/mykey -A -J adminuser@$(FW_IP) adminuser@west-europe-aa1.azure.lab
+	ssh -v -o StrictHostKeyChecking=no -i ssh-keys/mykey -A -J adminuser@$(FW_EW1_IP) adminuser@west-europe-aa1.azure.lab
+
+#fetching fw ips from tf output is slow. This lets us cache the ip's in a temporary file to use for other commands
+generate_fw_info:
+	echo -n "$(FW_EW1_IP_FROM_TF)" > fw-info-west-europe
+	echo -n "$(FW_UE2_IP_FROM_TF)" > fw-info-us-east-2

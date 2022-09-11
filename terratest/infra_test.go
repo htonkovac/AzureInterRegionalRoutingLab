@@ -1,106 +1,64 @@
 package test
 
 import (
-	"io/ioutil"
 	"log"
-	"os"
 	"testing"
 
-	"github.com/gruntwork-io/terratest/modules/terraform"
-	// "github.com/stretchr/testify/assert"
-	"golang.org/x/crypto/ssh"
+	"github.com/stretchr/testify/assert"
 )
 
-func TestMain(m *testing.M) {
-	exitVal := m.Run()
-	os.Exit(exitVal)
-}
-func TestTerragruntExample(t *testing.T) {
+func Test_it_is_possible_to_establish_a_ssh_connection_to_a_vm_in_eu_west_through_the_jumphost(t *testing.T) {
+	t.Parallel()
 
-	tfVmOptions := terraform.WithDefaultRetryableErrors(t, &terraform.Options{
-		TerraformDir:    "../terragrunt/subscription/eu-west-1/vm/vm-spokeA",
-		TerraformBinary: "terragrunt",
-	})
+	fwEw1 := getFwAddress(LocationEW1)
+	vmAddress := getVmAddress(LocationEW1, "a","a","1")
 
-	tfAzFwOptions := terraform.WithDefaultRetryableErrors(t, &terraform.Options{
-		TerraformDir:    "../terragrunt/subscription/eu-west-1/hub-and-spoke",
-		TerraformBinary: "terragrunt",
-	})
+	c := getSshClient(fwEw1, vmAddress)
 
-	vmAddr := terraform.Output(t, tfVmOptions, "private_ip") + ":22"
-	bastionAddr := terraform.Output(t, tfAzFwOptions, "fw_public_ip_address") + ":22"
-
-	config := &ssh.ClientConfig{
-		User: "adminuser",
-		Auth: []ssh.AuthMethod{
-			publicKey("../ssh-keys/mykey"),
-		},
-		HostKeyCallback: ssh.InsecureIgnoreHostKey(),
-	}
-	// connect to the bastion host
-	bClient, err := ssh.Dial("tcp", bastionAddr, config)
+	session, err := c.NewSession() //TODO: inspect how terratest is implemented to hide error handling
+	defer session.Close()
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	// Dial a connection to the service host, from the bastion
-	conn, err := bClient.Dial("tcp", vmAddr)
+	bytes,err := session.CombinedOutput("echo -n conn successful!")
+	if err != nil {
+		log.Fatal(err)
+	}
+	assert.Equal(t, string(bytes), "conn successful!", "A connection should be established and stdout+err should match the echoed string")
+}
+
+func Test_a_vm_in_spoke_A_can_connect_to_a_vm_in_spoke_B_within_eu_west_region(t *testing.T) {
+	t.Parallel()
+
+	fwEw1 := getFwAddress(LocationEW1)
+	vmAddress := getVmAddress(LocationEW1, "a","a","1")
+
+	c := getSshClient(fwEw1, vmAddress)
+
+	session, err := c.NewSession()
+	defer session.Close()
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	ncc, chans, reqs, err := ssh.NewClientConn(conn, vmAddr, config)
+	bytes,err := session.CombinedOutput("curl ")
 	if err != nil {
 		log.Fatal(err)
 	}
-
-	// sClient is an ssh client connected to the service host, through the bastion host.
-	sClient := ssh.NewClient(ncc, chans, reqs)
-
-	session, err := sClient.NewSession()
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	err = session.Run("echo hi")
-	if err != nil {
-		log.Fatal(err)
-	}
-}
-
-func publicKey(path string) ssh.AuthMethod {
-	key, err := ioutil.ReadFile(path)
-	if err != nil {
-		panic(err)
-	}
-	signer, err := ssh.ParsePrivateKey(key)
-	if err != nil {
-		panic(err)
-	}
-
-	return ssh.PublicKeys(signer)
-}
-
-func TestSpokeACanConnectToSpokeB(session ssh.Session) {
-session.Run("curl hostA:80")
-}
-
-type IPsInRegion struct {
-	jumpHostIp string
-	SpokeIps map[string]string
-}
-
-func (*IPsInRegion ips) getIps() {
+	assert.Equal(t, string(bytes), "conn successful!", "A connection should be established and stdout+err should match the echoed string")
 
 }
 
-func (*IPsInRegion ips) getSpokeIp(region string, spoke string) {
-	tfOptions := terraform.WithDefaultRetryableErrors(t, &terraform.Options{
-		TerraformDir:    "..//Users/hrvojetonkovac/Toptal/AxaXL/AzureInterRegionalRoutingLab/terragrunt/subscription/eu-west-1/vm/spokeA-subnetA-vm1",
-		TerraformBinary: "terragrunt",
-	})
-	vmAddr := terraform.Output(t, tfVmOptions, "private_ip")
-	ips.
+func Test_a_vm_in_spoke_A_can_connect_to_a_vm_in_spoke_B_within_same_region(t *testing.T) {
+	t.Parallel()
 }
 
+func Test_a_vm_in_spoke_A_can_connect_to_a_vm_in_spoke_A_across_regions(t *testing.T) {
+	t.Parallel()
+}
+
+func Test_a_vm_in_spoke_A_can_NOT_connect_to_a_vm_in_spoke_B_across_regions(t *testing.T) {
+	t.Parallel()
+}
 
