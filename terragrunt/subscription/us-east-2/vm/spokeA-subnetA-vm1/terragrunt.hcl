@@ -15,9 +15,9 @@ dependency "net" {
 
   mock_outputs = {
     spokes = {
-      spokeB = {
+      spokeA = {
         subnets = {
-          "SpokeBSubnetA" = {
+          "SubnetA" = {
             id = "/subscriptions/<subscription-id>/resourceGroups/<resource-group-name>/providers/Microsoft.Network/virtualNetworks/<virtual-network-name>/subnets/<subnet-name>"
           }
         }
@@ -27,7 +27,7 @@ dependency "net" {
 }
 
 inputs = {
-  name                     = "vm2-${local.location_hyphenated}-spokeB"
-  subnet_id                = dependency.net.outputs.spokes["spokeB"].subnets["SpokeBSubnetA"].id
+  name                     = "${local.location_hyphenated}-AA1"
+  subnet_id                = dependency.net.outputs.spokes["spokeA"].subnets["SubnetA"].id
   ssh_public_key_file_path = "${get_repo_root()}/ssh-keys/mykey.pub"
 }

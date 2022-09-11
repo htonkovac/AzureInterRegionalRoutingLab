@@ -11,7 +11,7 @@ include {
 }
 
 dependency "net" {
-  config_path = "../hub-and-spoke"
+  config_path = "../../hub-and-spoke"
 
   mock_outputs = { #TODO: fix or no longer use mocks
     hub = {
@@ -25,7 +25,7 @@ dependency "net" {
 }
 
 dependency "dns" {
-  config_path = "../../global/dns"
+  config_path = "../../../global/dns"
 
   mock_outputs_allowed_terraform_commands = ["plan", "validate"]
   mock_outputs = {
@@ -38,7 +38,7 @@ dependency "dns" {
 }
 
 inputs = {
-  name                = "mykvlskdjf5354jfs"
+  name                = "mykvlstgfjf5354jfs"
   subnet_id           = dependency.net.outputs.hub.subnets["TestingSubnet"].id
   private_dns_zone_id = dependency.dns.outputs.dns_zones["privatelink-vaultcore-azure-net"].id
 }

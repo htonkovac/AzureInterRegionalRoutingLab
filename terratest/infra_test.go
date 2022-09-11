@@ -80,3 +80,27 @@ func publicKey(path string) ssh.AuthMethod {
 
 	return ssh.PublicKeys(signer)
 }
+
+func TestSpokeACanConnectToSpokeB(session ssh.Session) {
+session.Run("curl hostA:80")
+}
+
+type IPsInRegion struct {
+	jumpHostIp string
+	SpokeIps map[string]string
+}
+
+func (*IPsInRegion ips) getIps() {
+
+}
+
+func (*IPsInRegion ips) getSpokeIp(region string, spoke string) {
+	tfOptions := terraform.WithDefaultRetryableErrors(t, &terraform.Options{
+		TerraformDir:    "..//Users/hrvojetonkovac/Toptal/AxaXL/AzureInterRegionalRoutingLab/terragrunt/subscription/eu-west-1/vm/spokeA-subnetA-vm1",
+		TerraformBinary: "terragrunt",
+	})
+	vmAddr := terraform.Output(t, tfVmOptions, "private_ip")
+	ips.
+}
+
+

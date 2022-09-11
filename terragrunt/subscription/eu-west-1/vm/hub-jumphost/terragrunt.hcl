@@ -14,12 +14,10 @@ dependency "net" {
   config_path = "../../hub-and-spoke"
 
   mock_outputs = {
-    spokes = {
-      spokeA = {
-        subnets = {
-          "SpokeASubnetA" = {
-            id = "/subscriptions/<subscription-id>/resourceGroups/<resource-group-name>/providers/Microsoft.Network/virtualNetworks/<virtual-network-name>/subnets/<subnet-name>"
-          }
+    hub = {
+      subnets = {
+        "JumpHostSubnet" = {
+          id = "/subscriptions/<subscription-id>/resourceGroups/<resource-group-name>/providers/Microsoft.Network/virtualNetworks/<virtual-network-name>/subnets/<subnet-name>"
         }
       }
     }
@@ -27,7 +25,7 @@ dependency "net" {
 }
 
 inputs = {
-  name                     = "vm1-${local.location_hyphenated}"
-  subnet_id                = dependency.net.outputs.spokes["spokeA"].subnets["SpokeASubnetA"].id
+  name                     = "${local.location_hyphenated}-jumphost"
+  subnet_id                = dependency.net.outputs.hub.subnets["JumpHostSubnet"].id
   ssh_public_key_file_path = "${get_repo_root()}/ssh-keys/mykey.pub"
 }

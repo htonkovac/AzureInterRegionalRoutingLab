@@ -11,13 +11,13 @@ include {
 }
 
 dependency "net" {
-  config_path = "../hub-and-spoke"
+  config_path = "../../hub-and-spoke"
 
   mock_outputs = { #TODO: fix or no longer use mocks
     spokes = {
       spokeA = {
         subnets = {
-          "SpokeASubnetA" = {
+          "SubnetA" = {
             id = "/subscriptions/<subscription-id>/resourceGroups/<resource-group-name>/providers/Microsoft.Network/virtualNetworks/<virtual-network-name>/subnets/<subnet-name>"
           }
         }
@@ -27,7 +27,7 @@ dependency "net" {
 }
 
 dependency "dns" {
-  config_path = "../../global/dns"
+  config_path = "../../../global/dns"
 
   mock_outputs_allowed_terraform_commands = ["plan", "validate"]
   mock_outputs = {
@@ -40,7 +40,7 @@ dependency "dns" {
 }
 
 inputs = {
-  name                = "mykvlskdjfoiejfs"
-  subnet_id           = dependency.net.outputs.spokes["spokeA"].subnets["SpokeASubnetA"].id
+  name                = "mykvtlskdj6oiejs"
+  subnet_id           = dependency.net.outputs.spokes["spokeA"].subnets["SubnetA"].id
   private_dns_zone_id = dependency.dns.outputs.dns_zones["privatelink-vaultcore-azure-net"].id
 }

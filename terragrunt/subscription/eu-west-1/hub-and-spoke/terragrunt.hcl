@@ -30,14 +30,12 @@ dependency "firewall_policy" {
 
 inputs = {
 
-  hub_vnet_name     = "hub-vnet-${local.location_hyphenated}"
+  hub_vnet_name     = "${local.location_hyphenated}-hub"
   hub_address_space = ["10.0.0.0/16"]
   hub_subnets = {
-    "AzureBastionSubnet" = {
-      name          = "AzureBastionSubnet",
+    "JumpHostSubnet" = {
+      name          = "JumpHostSubnet",
       address_space = ["10.0.1.0/24"]
-      no_nsg        = true
-      no_rt         = true
     },
     "GatewaySubnet" = {
       name          = "GatewaySubnet",
@@ -74,37 +72,58 @@ inputs = {
 
   spokes = {
     spokeA = {
-      vnet_name     = "spoke-A-${local.location_hyphenated}"
+      vnet_name     = "${local.location_hyphenated}-spoke-A"
       address_space = ["10.1.0.0/16"]
       subnets = {
-        "SpokeASubnetA" = {
-          name                                           = "SpokeASubnetA",
-          address_space                                  = ["10.1.1.0/24"]
-          enforce_private_link_endpoint_network_policies = false
+        "SubnetA" = {
+          name          = "SubnetA",
+          address_space = ["10.1.1.0/24"]
         },
-        "SpokeASubnetB" = {
-          name          = "SpokeASubnetB",
+        "SubnetB" = {
+          name          = "SubnetB",
           address_space = ["10.1.2.0/24"]
         },
-        "SpokeASubnetC" = {
-          name          = "SpokeASubnnetC",
+        "SubnetC" = {
+          name          = "SubnetC",
           address_space = ["10.1.3.0/24"]
         },
       }
     },
     spokeB = {
-      vnet_name     = "spoke-B-${local.location_hyphenated}"
+      vnet_name     = "${local.location_hyphenated}-spoke-B"
       address_space = ["10.2.0.0/16"]
       subnets = {
-        "SpokeBSubnetA" = {
-          name          = "SpokeASubnetA",
+        "SubnetA" = {
+          name          = "SubnetA",
           address_space = ["10.2.1.0/24"]
-        }
-    } },
-    spokePE = {
-      vnet_name     = "spoke-PE-${local.location_hyphenated}"
+        },
+        "SubnetB" = {
+          name          = "SubnetB",
+          address_space = ["10.2.2.0/24"]
+        },
+        "SubnetC" = {
+          name          = "SubnetC",
+          address_space = ["10.2.3.0/24"]
+        },
+      }
+    },
+    spokeC = {
+      vnet_name     = "${local.location_hyphenated}-spoke-C"
       address_space = ["10.3.0.0/16"]
-      subnets       = {}
+      subnets = {
+        "SubnetA" = {
+          name          = "SubnetA",
+          address_space = ["10.3.1.0/24"]
+        },
+        "SubnetB" = {
+          name          = "SubnetB",
+          address_space = ["10.3.2.0/24"]
+        },
+        "SubnetC" = {
+          name          = "SubnetC",
+          address_space = ["10.3.3.0/24"]
+        },
+      }
     }
   }
 }
