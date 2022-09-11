@@ -37,4 +37,4 @@ ssh_jumphost:
 	ssh -v -A -i ssh-keys/mykey adminuser@$(FW_IP)
 
 ssh_vm:
-	ssh -v  -o StrictHostKeyChecking=no -i ssh-keys/mykey -A -J adminuser@$(FW_IP) adminuser@10.1.1.4
+	ssh -v -o StrictHostKeyChecking=no -i ssh-keys/mykey -A -J adminuser@$(FW_IP) adminuser@west-europe-aa1.azure.lab

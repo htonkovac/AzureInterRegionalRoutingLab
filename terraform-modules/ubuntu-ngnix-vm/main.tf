@@ -32,7 +32,7 @@ resource "azurerm_linux_virtual_machine" "nginx" {
     public_key = file(var.ssh_public_key_file_path)
   }
 
-  computer_name                   = "nginx"
+  computer_name                   = "${var.name}.azure.lab"
   admin_username                  = "adminuser"
   disable_password_authentication = true
 
@@ -41,4 +41,12 @@ resource "azurerm_linux_virtual_machine" "nginx" {
     caching              = "ReadWrite"
     storage_account_type = "Standard_LRS"
   }
+}
+
+resource "azurerm_private_dns_a_record" "a_record" {
+  name                = var.name
+  zone_name           = "azure.lab"
+  resource_group_name = var.resource_group_name
+  ttl                 = 30
+  records             = [azurerm_network_interface.nic.private_ip_address]
 }

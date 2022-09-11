@@ -5,6 +5,11 @@ resource "azurerm_virtual_network" "vnet" {
   address_space       = var.address_space
 }
 
+resource "azurerm_virtual_network_dns_servers" "vnet" {
+  virtual_network_id = azurerm_virtual_network.vnet.id
+  dns_servers        = var.dns_servers
+}
+
 resource "azurerm_subnet" "subnets" {
   for_each = var.subnets
 

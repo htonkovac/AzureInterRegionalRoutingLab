@@ -5,6 +5,8 @@ module "hub" {
   vnet_name           = var.hub_vnet_name
   address_space       = var.hub_address_space
   subnets             = var.hub_subnets
+
+  dns_servers = [module.az_fw.private_ip_address]
 }
 
 module "spokes" {
@@ -17,6 +19,8 @@ module "spokes" {
   vnet_name     = each.value.vnet_name
   address_space = each.value.address_space
   subnets       = each.value.subnets
+
+  dns_servers = [module.az_fw.private_ip_address]
 }
 
 module "spoke_routes" {

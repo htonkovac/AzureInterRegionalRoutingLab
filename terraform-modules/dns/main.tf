@@ -1,13 +1,13 @@
 
 locals {
-  private_dns_zones = {
+  private_dns_zones = merge({
     azure-automation-net              = "privatelink.azure-automation.net"
     database-windows-net              = "privatelink.database.windows.net"
     privatelink-sql-azuresynapse-net  = "privatelink.sql.azuresynapse.net"
     privatelink-dev-azuresynapse-net  = "privatelink.dev.azuresynapse.net"
     privatelink-blob-core-windows-net = "privatelink.blob.core.windows.net"
     privatelink-vaultcore-azure-net   = "privatelink.vaultcore.azure.net"
-  }
+  }, var.private_dns_zones)
 }
 
 resource "azurerm_private_dns_zone" "private_dns_zones" {

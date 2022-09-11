@@ -33,4 +33,7 @@ inputs = {
     dependency.net_ue2.outputs.hub.vnet_id,
     dependency.net_ew1.outputs.hub.vnet_id,
   ]
+  private_dns_zones = {
+    "azure-lab" = "azure.lab"
+  }
 }

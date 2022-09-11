@@ -10,6 +10,10 @@ locals {
   location_hyphenated = read_terragrunt_config(find_in_parent_folders("region.hcl")).locals.location_hyphenated
 }
 
+dependencies {
+  paths = ["../../../global/dns"]
+}
+
 dependency "net" {
   config_path = "../../hub-and-spoke"
 
