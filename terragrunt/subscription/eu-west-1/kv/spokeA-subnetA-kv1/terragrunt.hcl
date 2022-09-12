@@ -29,7 +29,7 @@ dependency "net" {
 dependency "dns" {
   config_path = "../../../global/dns"
 
-  mock_outputs_allowed_terraform_commands = ["plan", "validate"]
+  mock_outputs_allowed_terraform_commands = ["plan", "validate", "destroy"]
   mock_outputs = {
     dns_zones = {
       privatelink-vaultcore-azure-net = {

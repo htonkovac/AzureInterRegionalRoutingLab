@@ -12,7 +12,7 @@ include {
 
 dependency "jumphost" {
   config_path = "../../vm/hub-jumphost"
-  mock_outputs_allowed_terraform_commands = ["plan", "validate"]
+  mock_outputs_allowed_terraform_commands = ["plan", "validate", "destroy"]
   mock_outputs = {
     private_ip = "10.0.0.0"
   }
@@ -21,7 +21,7 @@ dependency "jumphost" {
 dependency "policy" {
   config_path = "../../firewall-policy"
 
-  mock_outputs_allowed_terraform_commands = ["plan", "validate"]
+  mock_outputs_allowed_terraform_commands = ["plan", "validate", "destroy"]
   mock_outputs = {
     id = "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/mygroup1/providers/Microsoft.Network/firewallPolicies/policy1"
   }

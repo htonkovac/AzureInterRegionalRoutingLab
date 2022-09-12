@@ -22,7 +22,7 @@ dependency "laws" {
 dependency "firewall_policy" {
   config_path = "../firewall-policy"
 
-  mock_outputs_allowed_terraform_commands = ["plan", "validate"]
+  mock_outputs_allowed_terraform_commands = ["plan", "validate", "destroy"]
   mock_outputs = {
     id = "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/mygroup1/providers/Microsoft.Network/firewallPolicies/policy1"
   }

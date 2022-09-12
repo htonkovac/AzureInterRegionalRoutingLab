@@ -15,6 +15,9 @@ fmt:
 tg_apply_all:
 	cd terragrunt/subscription && terragrunt run-all apply --terragrunt-non-interactive
 
+tg_destroy_all:
+	cd terragrunt/subscription && terragrunt run-all destroy --terragrunt-non-interactive
+
 
 tg_apply_vms:
 	cd terragrunt/subscription/eu-west-1/vm && terragrunt run-all apply --terragrunt-non-interactive

@@ -9,7 +9,7 @@ include {
 dependency "net_ew1" {
   config_path = "../../eu-west-1/hub-and-spoke"
 
-  mock_outputs_allowed_terraform_commands = ["plan", "validate"]
+  mock_outputs_allowed_terraform_commands = ["plan", "validate", "destroy"]
   mock_outputs = {
     hub = {
       vnet_id = "/subscriptions/<subscription-id>/resourceGroups/<resource-group-name>/providers/Microsoft.Network/virtualNetworks/<virtual-network-name>"
@@ -20,7 +20,7 @@ dependency "net_ew1" {
 dependency "net_ue2" {
   config_path = "../../us-east-2/hub-and-spoke"
 
-  mock_outputs_allowed_terraform_commands = ["plan", "validate"]
+  mock_outputs_allowed_terraform_commands = ["plan", "validate", "destroy"]
   mock_outputs = {
     hub = {
       vnet_id = "/subscriptions/<subscription-id>/resourceGroups/<resource-group-name>/providers/Microsoft.Network/virtualNetworks/<virtual-network-name>"

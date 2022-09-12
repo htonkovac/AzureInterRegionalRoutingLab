@@ -46,7 +46,7 @@ remote_state {
   config = {
     subscription_id      = "${local.subscription_id}"
     key                  = "${path_relative_to_include()}/terraform.tfstate"
-    resource_group_name  = "AzureInterRegionalRoutingLab"
+    resource_group_name  = "AzureRoutingLab-TF-STATE"
     storage_account_name = "tfstateazureroutinglab"
     container_name       = "tf-state"
   }
