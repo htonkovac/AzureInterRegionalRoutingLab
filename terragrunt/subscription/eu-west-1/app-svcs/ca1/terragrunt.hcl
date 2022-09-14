@@ -40,7 +40,7 @@ dependency "dns" {
 }
 
 inputs = {
-  name = "${local.location_hyphenated}-ca1"
-  pe_subnet_id = dependency.net.outputs.spokes["spokeB"].subnets["SubnetA"].id
+  name                = "${local.location_hyphenated}-ca1"
+  pe_subnet_id        = dependency.net.outputs.spokes["spokeB"].subnets["SubnetA"].id
   private_dns_zone_id = dependency.dns.outputs.dns_zones["privatelink-azurewebsites-net"].id
 }

@@ -26,7 +26,7 @@ dependency "net" {
 
 
 inputs = {
-  name = "appgw1-${local.location_hyphenated}"
+  name      = "appgw1-${local.location_hyphenated}"
   subnet_id = dependency.net.outputs.hub.subnets["ApplicationGatewaySubnet"].id
-  fqdns = ["west-europe-ca1.azurewebsites.net"]
+  fqdns     = ["west-europe-ca1.azurewebsites.net"]
 }

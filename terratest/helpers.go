@@ -21,11 +21,11 @@ func getFwAddress(fwLocation string) string {
 	if err != nil { //TODO: consider implementing reading this from terragrunt. However, reading from TG is very slow and requires t.Testing
 		log.Fatal(err)
 	}
-	return string(bytes)+":22"
+	return string(bytes) + ":22"
 }
 
 func getVmAddress(fwLocation string, spoke string, subnet string, index string) string {
-	return LocationEW1+"-"+spoke+subnet+index+".azure.lab:22"
+	return LocationEW1 + "-" + spoke + subnet + index + ".azure.lab:22"
 }
 
 func TestTerragruntExample(t *testing.T) {

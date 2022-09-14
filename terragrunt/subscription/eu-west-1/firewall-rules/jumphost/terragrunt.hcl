@@ -11,7 +11,7 @@ include {
 }
 
 dependency "jumphost" {
-  config_path = "../../vm/hub-jumphost"
+  config_path                             = "../../vm/hub-jumphost"
   mock_outputs_allowed_terraform_commands = ["plan", "validate", "destroy"]
   mock_outputs = {
     private_ip = "10.0.0.0"
@@ -38,5 +38,5 @@ dependency "net" {
 inputs = {
   firewall_policy_id = dependency.policy.outputs.id
   firewall_public_ip = dependency.net.outputs.fw_public_ip_address
-  jump_host_ip = dependency.jumphost.outputs.private_ip
+  jump_host_ip       = dependency.jumphost.outputs.private_ip
 }

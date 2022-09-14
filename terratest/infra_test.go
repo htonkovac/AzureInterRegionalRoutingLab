@@ -11,7 +11,7 @@ func Test_it_is_possible_to_establish_a_ssh_connection_to_a_vm_in_eu_west_throug
 	t.Parallel()
 
 	fwEw1 := getFwAddress(LocationEW1)
-	vmAddress := getVmAddress(LocationEW1, "a","a","1")
+	vmAddress := getVmAddress(LocationEW1, "a", "a", "1")
 
 	c := getSshClient(fwEw1, vmAddress)
 
@@ -21,7 +21,7 @@ func Test_it_is_possible_to_establish_a_ssh_connection_to_a_vm_in_eu_west_throug
 		log.Fatal(err)
 	}
 
-	bytes,err := session.CombinedOutput("echo -n conn successful!")
+	bytes, err := session.CombinedOutput("echo -n conn successful!")
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -32,8 +32,8 @@ func Test_a_vm_in_spoke_A_can_connect_to_a_vm_in_spoke_B_within_eu_west_region(t
 	t.Parallel()
 
 	fwEw1 := getFwAddress(LocationEW1)
-	vmAddress := getVmAddress(LocationEW1, "a","a","1")
- 
+	vmAddress := getVmAddress(LocationEW1, "a", "a", "1")
+
 	c := getSshClient(fwEw1, vmAddress)
 
 	session, err := c.NewSession()
@@ -42,7 +42,7 @@ func Test_a_vm_in_spoke_A_can_connect_to_a_vm_in_spoke_B_within_eu_west_region(t
 		log.Fatal(err)
 	}
 
-	bytes,err := session.CombinedOutput("curl ")
+	bytes, err := session.CombinedOutput("curl ")
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -61,4 +61,3 @@ func Test_a_vm_in_spoke_A_can_connect_to_a_vm_in_spoke_A_across_regions(t *testi
 func Test_a_vm_in_spoke_A_can_NOT_connect_to_a_vm_in_spoke_B_across_regions(t *testing.T) {
 	t.Parallel()
 }
-

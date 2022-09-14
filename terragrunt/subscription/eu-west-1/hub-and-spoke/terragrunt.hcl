@@ -48,10 +48,10 @@ inputs = {
       address_space = ["10.0.3.0/24"]
       no_nsg        = true
       /* no_rt         = true */
-      rt = { 
-        name = "testin1234"
-          routes = {}
-      
+      rt = {
+        name   = "testin1234"
+        routes = {}
+
       }
     },
     "AzureFirewallManagementSubnet" = {
@@ -64,9 +64,9 @@ inputs = {
       name          = "ApplicationGatewaySubnet",
       address_space = ["10.0.6.0/24"]
       nsg = {
-        name = "app-gw-test-nsg"
+        name  = "app-gw-test-nsg"
         rules = {}
-        
+
       }
     },
     "TestingSubnet" = {

@@ -42,17 +42,17 @@ resource "azurerm_application_gateway" "network" {
   }
 
   backend_address_pool {
-    name = local.backend_address_pool_name
+    name  = local.backend_address_pool_name
     fqdns = var.fqdns
   }
 
   backend_http_settings {
-    name                  = local.http_setting_name
-    cookie_based_affinity = "Disabled"
-    path                  = "/"
-    port                  = 443
-    protocol              = "Https"
-    request_timeout       = 15
+    name                                = local.http_setting_name
+    cookie_based_affinity               = "Disabled"
+    path                                = "/"
+    port                                = 443
+    protocol                            = "Https"
+    request_timeout                     = 15
     pick_host_name_from_backend_address = true
   }
 

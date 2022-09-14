@@ -15,9 +15,9 @@ resource "azurerm_app_service" "x" {
   location            = var.location
   app_service_plan_id = azurerm_app_service_plan.x.id
 
-site_config {
+  site_config {
     default_documents = ["hostingstart.html"]
-}
+  }
 
   auth_settings {
     enabled = false
