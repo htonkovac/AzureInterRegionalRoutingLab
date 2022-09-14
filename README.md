@@ -73,6 +73,8 @@ I would like to dearly thank all sources.
 3. https://www.youtube.com/watch?v=LuKYu9ASGyo #terragrunt introduction
 4. https://journeyofthegeek.com #many blog posts from this guy showcase many usecases in azure networking
 5. https://cloudnetsec.blogspot.com/2019/02/azure-intra-region-and-inter-region.html # especially important blog post 
+6. https://github.com/erjosito/azure-networking-lab
+
 
 # Places I've stolen code snippets from:
 6. https://jeffreyjblanchard.medium.com/azure-private-endpoints-and-terraform-85450fe9861c # deploying a KV

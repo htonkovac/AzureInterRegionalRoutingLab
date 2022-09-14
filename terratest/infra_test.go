@@ -33,7 +33,7 @@ func Test_a_vm_in_spoke_A_can_connect_to_a_vm_in_spoke_B_within_eu_west_region(t
 
 	fwEw1 := getFwAddress(LocationEW1)
 	vmAddress := getVmAddress(LocationEW1, "a","a","1")
-
+ 
 	c := getSshClient(fwEw1, vmAddress)
 
 	session, err := c.NewSession()
