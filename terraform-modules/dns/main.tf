@@ -7,6 +7,8 @@ locals {
     privatelink-dev-azuresynapse-net  = "privatelink.dev.azuresynapse.net"
     privatelink-blob-core-windows-net = "privatelink.blob.core.windows.net"
     privatelink-vaultcore-azure-net   = "privatelink.vaultcore.azure.net"
+    privatelink-azurewebsites-net     = "privatelink.azurewebsites.net"
+    scm-privatelink-azurewebsites-net = "scm.privatelink.azurewebsites.net"
   }, var.private_dns_zones)
 }
 

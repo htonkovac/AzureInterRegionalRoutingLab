@@ -26,6 +26,19 @@ dependency "net" {
   }
 }
 
+dependency "dns" {
+  config_path = "../../../global/dns"
+
+  mock_outputs_allowed_terraform_commands = ["plan", "validate", "destroy"]
+  mock_outputs = {
+    dns_zones = {
+      privatelink-vaultcore-azure-net = {
+        id = "/subscriptions/<subscription-id>/resourceGroups/<resource-group-name>/providers/Microsoft.Network/privateDnsZones/<zone-name>"
+      }
+    }
+  }
+}
+
 inputs = {
   name                     = "${local.location_hyphenated}-ba1"
   subnet_id                = dependency.net.outputs.spokes["spokeB"].subnets["SubnetA"].id

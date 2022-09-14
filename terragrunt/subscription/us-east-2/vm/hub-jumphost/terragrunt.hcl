@@ -24,6 +24,19 @@ dependency "net" {
   }
 }
 
+dependency "dns" {
+  config_path = "../../../global/dns"
+
+  mock_outputs_allowed_terraform_commands = ["plan", "validate", "destroy"]
+  mock_outputs = {
+    dns_zones = {
+      privatelink-vaultcore-azure-net = {
+        id = "/subscriptions/<subscription-id>/resourceGroups/<resource-group-name>/providers/Microsoft.Network/privateDnsZones/<zone-name>"
+      }
+    }
+  }
+}
+
 inputs = {
   name                     = "${local.location_hyphenated}-jumphost"
   subnet_id                = dependency.net.outputs.hub.subnets["JumpHostSubnet"].id

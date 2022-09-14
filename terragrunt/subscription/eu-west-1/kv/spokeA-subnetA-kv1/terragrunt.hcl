@@ -40,7 +40,7 @@ dependency "dns" {
 }
 
 inputs = {
-  name                = "mykvtlskdj6oiejs"
+  name                = "mykvtlskdj6oiewiiaa1"
   subnet_id           = dependency.net.outputs.spokes["spokeA"].subnets["SubnetA"].id
   private_dns_zone_id = dependency.dns.outputs.dns_zones["privatelink-vaultcore-azure-net"].id
 }

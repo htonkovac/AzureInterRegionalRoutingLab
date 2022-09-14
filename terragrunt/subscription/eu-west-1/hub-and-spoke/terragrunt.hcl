@@ -47,7 +47,12 @@ inputs = {
       name          = "AzureFirewallSubnet",
       address_space = ["10.0.3.0/24"]
       no_nsg        = true
-      no_rt         = true
+      /* no_rt         = true */
+      rt = { 
+        name = "testin1234"
+          routes = {}
+      
+      }
     },
     "AzureFirewallManagementSubnet" = {
       name          = "AzureFirewallManagementSubnet",
@@ -58,11 +63,16 @@ inputs = {
     "ApplicationGatewaySubnet" = {
       name          = "ApplicationGatewaySubnet",
       address_space = ["10.0.6.0/24"]
+      nsg = {
+        name = "app-gw-test-nsg"
+        rules = {}
+        
+      }
     },
     "TestingSubnet" = {
       name                                           = "TestingSubnet",
       address_space                                  = ["10.0.7.0/24"],
-      enforce_private_link_endpoint_network_policies = true
+      enforce_private_link_endpoint_network_policies = false
     }
   }
 

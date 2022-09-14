@@ -42,7 +42,7 @@ dependency "dns" {
 }
 
 inputs = {
-  name                     = "${local.location_hyphenated}-jumphost"
+  name                     = "${local.location_hyphenated}-jumphost2"
   subnet_id                = dependency.net.outputs.hub.subnets["JumpHostSubnet"].id
   ssh_public_key_file_path = "${get_repo_root()}/ssh-keys/mykey.pub"
 }

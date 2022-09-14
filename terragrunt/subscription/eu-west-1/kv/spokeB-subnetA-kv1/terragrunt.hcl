@@ -1,19 +1,19 @@
 terraform {
-  source = "${get_repo_root()}/terraform-modules/ubuntu-ngnix-vm"
-}
-
-include {
-  path = find_in_parent_folders()
+  source = "${get_repo_root()}/terraform-modules/key-vault-with-pe"
 }
 
 locals {
   location_hyphenated = read_terragrunt_config(find_in_parent_folders("region.hcl")).locals.location_hyphenated
 }
 
+include {
+  path = find_in_parent_folders()
+}
+
 dependency "net" {
   config_path = "../../hub-and-spoke"
 
-  mock_outputs = {
+  mock_outputs = { #TODO: fix or no longer use mocks
     spokes = {
       spokeA = {
         subnets = {
@@ -40,7 +40,7 @@ dependency "dns" {
 }
 
 inputs = {
-  name                     = "${local.location_hyphenated}-aa1"
-  subnet_id                = dependency.net.outputs.spokes["spokeA"].subnets["SubnetA"].id
-  ssh_public_key_file_path = "${get_repo_root()}/ssh-keys/mykey.pub"
+  name                = "mykvtlskdj6oiewiiba1"
+  subnet_id           = dependency.net.outputs.spokes["spokeB"].subnets["SubnetA"].id
+  private_dns_zone_id = dependency.dns.outputs.dns_zones["privatelink-vaultcore-azure-net"].id
 }
