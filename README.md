@@ -72,6 +72,7 @@ I would like to dearly thank all sources.
 1. https://gaunacode.com/using-terragrunt-to-deploy-to-azure #terragrunt azure introduction
 3. https://www.youtube.com/watch?v=LuKYu9ASGyo #terragrunt introduction
 4. https://journeyofthegeek.com #many blog posts from this guy showcase many usecases in azure networking
+4. https://journeyofthegeek.com/2020/09/10/interesting-behaviors-with-private-endpoints-new/ #this blog post in particular
 5. https://cloudnetsec.blogspot.com/2019/02/azure-intra-region-and-inter-region.html # especially important blog post 
 6. https://github.com/erjosito/azure-networking-lab
 
