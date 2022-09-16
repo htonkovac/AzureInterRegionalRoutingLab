@@ -7,7 +7,7 @@ resource "azurerm_virtual_network_peering" "vnet_peer_0" {
   
   allow_virtual_network_access = true #these booleans need checking, setting all to true just for testing
   allow_forwarded_traffic      = true
-  use_remote_gateways          = true
+  use_remote_gateways          = false
 
 
 }
