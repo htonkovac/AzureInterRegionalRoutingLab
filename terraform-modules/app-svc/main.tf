@@ -25,6 +25,8 @@ resource "azurerm_app_service" "x" {
 }
 
 resource "azurerm_private_endpoint" "x" {
+  count = var.private_endpoint_enabled ? 1 : 0
+
   name                = "${var.name}-pe"
   resource_group_name = var.resource_group_name
   location            = var.location
