@@ -92,3 +92,4 @@ I would like to dearly thank all sources.
 
 4. https://stackoverflow.com/questions/35906991/go-x-crypto-ssh-how-to-establish-ssh-connection-to-private-instance-over-a-ba
 
+Drawing tool: https://excalidraw.com
