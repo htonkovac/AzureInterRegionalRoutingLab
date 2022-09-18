@@ -70,7 +70,7 @@ On the screenshot above we can see that only one InterfaceEndpoint has been inva
 # Understanding the need to SNAT for HUB->PE traffic.
 In case you are using private endpoints and want to ensure the traffic is inspected by the azure firewall you are probably leveraging the new PrivateEndpointNetworkPolicies: Enabled feature. There are certain caveats when using PEs.
 For Spoke->PEinASpoke traffic there are no special considerations. If the UDRs are properly setup traffic should flow without issues. However, for hub to private endpoint traffic there are special considerations. SNAT is needed in this case:
-![Routing to a PE](docs/diagrams/RoutingtoAPE.png) 
+![Routing to a PE](docs/diagrams/RoutingToAPE.png) 
 
 One way to achieve SNAT in azure firewall is to make sure an application rule is evaluated. Application rules implicitly SNAT:
 ![Routing to a PE](docs/diagrams/ApplicationRulesSNAT.png) 
