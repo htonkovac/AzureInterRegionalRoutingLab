@@ -7,3 +7,9 @@ variable "location" {
 variable "name" {
   type = string
 }
+variable "subnet_id" {
+  type = string
+}
+variable "private_dns_zone_id" {
+  type = string
+}
