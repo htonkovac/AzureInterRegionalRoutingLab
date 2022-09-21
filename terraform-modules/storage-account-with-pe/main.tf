@@ -1,5 +1,16 @@
+locals {
+  name = "${random_string.random.result}${var.name}"
+}
+
+resource "random_string" "random" {
+  length  = 8
+  special = false
+  upper   = false
+  lower   = true
+}
+
 resource "azurerm_storage_account" "sa" {
-  name                     = var.name
+  name                     = local.name
   resource_group_name      = var.resource_group_name
   location                 = var.location
   account_tier             = "StandardV2"

@@ -1,5 +1,5 @@
 terraform {
-  source = "${get_repo_root()}/terraform-modules/key-vault-with-pe"
+  source = "${get_repo_root()}/terraform-modules/storage-account-with-pe"
 }
 
 locals {

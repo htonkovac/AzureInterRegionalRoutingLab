@@ -10,14 +10,14 @@ variable "name" {
 
 
 variable "private_endpoint_enabled" {
-  type = bool
+  type    = bool
   default = false
 }
 variable "pe_subnet_id" {
-  type = string
+  type    = string
   default = ""
 }
 variable "private_dns_zone_id" {
-  type = string
+  type    = string
   default = ""
 }
