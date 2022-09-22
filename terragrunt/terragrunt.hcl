@@ -9,10 +9,12 @@ locals {
   subscription_vars = read_terragrunt_config(find_in_parent_folders("subscription.hcl"))
 
   # Automatically load region-level variables
-  region_vars = read_terragrunt_config(find_in_parent_folders("region.hcl"))
+  region_vars  = read_terragrunt_config(find_in_parent_folders("region.hcl"))
+  backend_vars = read_terragrunt_config("${get_parent_terragrunt_dir()}/backend.hcl")
 
-  location        = local.region_vars.locals.location
-  subscription_id = local.subscription_vars.locals.subscription_id
+  location                     = local.region_vars.locals.location
+  subscription_id              = local.subscription_vars.locals.subscription_id
+  backend_storage_account_name = try(local.backend_vars.locals.storage_account_name, "tfstateazureroutinglab")
 }
 
 # Generate Azure providers
@@ -47,7 +49,7 @@ remote_state {
     subscription_id      = "${local.subscription_id}"
     key                  = "${path_relative_to_include()}/terraform.tfstate"
     resource_group_name  = "AzureRoutingLab-TF-STATE"
-    storage_account_name = "tfstateazureroutinglab"
+    storage_account_name = "${local.backend_storage_account_name}"
     container_name       = "tf-state"
   }
   generate = {

@@ -16,10 +16,3 @@ provider "registry.terraform.io/hashicorp/azurerm" {
     "h1:SZgE4TSSEfuJHSZDdJvy2/uj6WpfWzMz2GfclTkpsis=",
   ]
 }
-
-provider "registry.terraform.io/hashicorp/random" {
-  version = "3.4.3"
-  hashes = [
-    "h1:tL3katm68lX+4lAncjQA9AXL4GR/VM+RPwqYf4D2X8Q=",
-  ]
-}

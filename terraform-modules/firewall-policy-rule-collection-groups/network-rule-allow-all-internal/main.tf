@@ -9,7 +9,7 @@ resource "azurerm_firewall_policy_rule_collection_group" "all_internal" {
     action   = "Allow"
     rule {
       name                  = "network_rule_allow_all_internal"
-      protocols             = ["*"]
+      protocols             = ["Any"]
       source_addresses      = ["10.0.0.0/8"]
       destination_addresses = ["10.0.0.0/8"]
       destination_ports     = ["*"]
