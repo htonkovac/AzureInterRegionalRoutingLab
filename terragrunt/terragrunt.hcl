@@ -14,7 +14,10 @@ locals {
 
   location                     = local.region_vars.locals.location
   subscription_id              = local.subscription_vars.locals.subscription_id
+
   backend_storage_account_name = try(local.backend_vars.locals.storage_account_name, "tfstateazureroutinglab")
+  backend_resource_group_name  = try(local.backend_vars.locals.resource_group_name,"AzureRoutingLab-TF-STATE")
+  backend_container_name       = try(local.backend_vars.locals.container_name,"tf-state")
 }
 
 # Generate Azure providers
@@ -48,9 +51,9 @@ remote_state {
   config = {
     subscription_id      = "${local.subscription_id}"
     key                  = "${path_relative_to_include()}/terraform.tfstate"
-    resource_group_name  = "AzureRoutingLab-TF-STATE"
+    resource_group_name =  "${local.backend_resource_group_name}"
     storage_account_name = "${local.backend_storage_account_name}"
-    container_name       = "tf-state"
+    container_name =  "${local.backend_container_name}"
   }
   generate = {
     path      = "backend.tf"
