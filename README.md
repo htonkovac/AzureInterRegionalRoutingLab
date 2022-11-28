@@ -75,6 +75,10 @@ For Spoke->PEinASpoke traffic there are no special considerations. If the UDRs a
 One way to achieve SNAT in azure firewall is to make sure an application rule is evaluated. Application rules implicitly SNAT:
 ![Routing to a PE](docs/diagrams/ApplicationRulesSNAT.png) 
 
+# Cross region traffic and Application rules
+![Routing to a PE](docs/diagrams/ApplicationRulesCrossRegion.png)
+
+
 # Important sources that teach important lessons
 I would like to dearly thank all sources.
 1. https://gaunacode.com/using-terragrunt-to-deploy-to-azure #terragrunt azure introduction
