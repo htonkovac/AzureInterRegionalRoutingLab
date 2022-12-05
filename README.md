@@ -53,6 +53,7 @@ Unfortunatelly, terraform configuration renamed some of the api properties to ma
 https://github.com/hashicorp/terraform-provider-azurerm/issues/6334
 
 `enforce_private_link_endpoint_network_policies` needs to be set to `false` in order for the provider to set `PrivateEndpointNetworkPolicies: Enabled`
+NOTE: This will be fixed in version 4 of azurerm provider
 
 # How PrivateEndpointNetworkPolicies: Enabled works
 When this setting is enabled on a subnet. All private endpoints in that subnet will have their routes potentially invalidated in that AND all other subnets (if the right override rule exists). 
