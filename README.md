@@ -80,7 +80,10 @@ One way to achieve SNAT in azure firewall is to make sure an application rule is
 ![Routing to a PE](docs/diagrams/ApplicationRulesCrossRegion.png)
 
 
-# Important sources that teach important lessons
+# Troubleshooting AzFW
+https://h17consulting.notion.site/h17consulting/Troubleshooting-Azure-Firewall-Issues-Why-Traffic-May-Be-Shown-as-Allowed-but-Not-Flowing-Through-Y-e9fd450421434d91912711c69d10ca16
+
+# Important sources that teach valuable lessons
 I would like to dearly thank all sources.
 1. https://gaunacode.com/using-terragrunt-to-deploy-to-azure #terragrunt azure introduction
 3. https://www.youtube.com/watch?v=LuKYu9ASGyo #terragrunt introduction
