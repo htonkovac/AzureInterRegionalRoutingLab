@@ -69,8 +69,8 @@ for context on the above screenshot:
 On the screenshot above we can see that only one InterfaceEndpoint has been invalidated (very bottom of the list). Notice that routes exist for overriding both of them, but only one is working. This is because the setting affects all private endpoint interface routes (in whichever vnet they are created) of private endpoint that exist in the subnet, but doesn't work on private endpoint interface routes from other subnets.
 
 # Understanding the need to SNAT for HUB->PE traffic.
-In case you are using private endpoints and want to ensure the traffic is inspected by the azure firewall you are probably leveraging the new PrivateEndpointNetworkPolicies: Enabled feature. There are certain caveats when using PEs.
-For Spoke->PEinASpoke traffic there are no special considerations. If the UDRs are properly setup traffic should flow without issues. However, for hub to private endpoint traffic there are special considerations. SNAT is needed in this case:
+In case you are using private endpoints and want to ensure the traffic is inspected by the azure firewall you are probably leveraging the new PrivateEndpointNetworkPolicies: Enabled feature. There are certain caveats when using Private Endpoints with this feature and trying to inspect the Traffic with the AzFirewall.
+For traffic originating in a Spoke Vnet and flowing to a PrivateEndpoint in a spoke VNet there are no special considerations. If the UDRs are properly setup, the traffic should flow without issues. However, for hub to private endpoint traffic there are special considerations. SNAT is needed in this case:
 ![Routing to a PE](docs/diagrams/RoutingToAPE.png) 
 
 One way to achieve SNAT in azure firewall is to make sure an application rule is evaluated. Application rules implicitly SNAT:
